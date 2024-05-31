@@ -114,7 +114,9 @@ namespace WebApiCrud.Controllers
                             email = user.Email,
                             fullName = user.fullName,
                             phoneNumber = user.PhoneNumber,
-                            roleName=user.roleName
+                            roleName=user.roleName,
+                            UserId=user.Id
+                            
                         };
                         return Ok(new {tokenn= _token , user= User });
                     }

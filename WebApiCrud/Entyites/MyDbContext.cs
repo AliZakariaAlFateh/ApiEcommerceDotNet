@@ -14,6 +14,8 @@ namespace WebApiCrud.Entyites
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -42,6 +44,17 @@ namespace WebApiCrud.Entyites
                 new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
                 new IdentityRole { Name = "User", NormalizedName = "USER" }
                 );
+
+
+            builder.Entity<Order>()
+                    .HasOne(o => o.User)
+                    .WithMany(u => u.Orders)
+                    .HasForeignKey(o => o.UserId);
+
+            builder.Entity<OrderItem>()
+                    .HasOne(oi => oi.Order)
+                    .WithMany(o => o.OrderItems)
+                    .HasForeignKey(oi => oi.OrderId);
 
         }
 

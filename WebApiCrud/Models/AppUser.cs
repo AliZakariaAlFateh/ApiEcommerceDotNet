@@ -12,5 +12,8 @@ namespace WebApiCrud.Models
         public string? fullName { get; set; }
         public string? imageName { get; set; }
         public string? roleName { get; set; }
+
+
+        public ICollection<Order> Orders { get; set; }
     }
 }

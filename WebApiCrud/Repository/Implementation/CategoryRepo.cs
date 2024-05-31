@@ -18,7 +18,7 @@ namespace WebApiCrud.Repository.Implementation
         }
 
 
-
+        
         public List<Category> GetAll()
         {
              var Categories=_db.Categories.Include(p => p.products).ToList();

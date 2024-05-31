@@ -313,7 +313,7 @@ namespace WebApiCrud.Controllers
         //url/id=1
         //with out i use constraint at Data annotation we use query string 
         //url/?id=1
-        public ActionResult Put([FromForm] Product model, int id)
+        public ActionResult Put([FromForm] DtoProduct model, int id)
         {
 
             if (model == null || id == 0)
