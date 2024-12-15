@@ -76,6 +76,7 @@ namespace WebApiCrud.Controllers
                             if (product.Qty >= orderItem.Count)
                             {
                                 product.Qty -= orderItem.Count;
+                                product.soldCount += orderItem.Count;
                             }
                             else
                             {
@@ -207,7 +208,8 @@ namespace WebApiCrud.Controllers
                 .Select(o => new DtoOrder
                 {
                     id = o.Id,
-                    UserId = o.UserId,
+                    //UserId = o.UserId,
+                    Username=o.Username,
                     OrderItems = o.OrderItems.Select(oi => new DtoOrderItem
                     {
                         Id = oi.Id,

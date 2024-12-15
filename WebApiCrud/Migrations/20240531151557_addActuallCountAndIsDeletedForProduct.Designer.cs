@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiCrud.Entyites;
 
@@ -11,9 +12,11 @@ using WebApiCrud.Entyites;
 namespace WebApiCrud.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240531151557_addActuallCountAndIsDeletedForProduct")]
+    partial class addActuallCountAndIsDeletedForProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +54,15 @@ namespace WebApiCrud.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6e3db2c6-af2e-47f9-9929-af50d1e74e8c",
-                            ConcurrencyStamp = "594553c1-3ec1-4cc4-b101-9b55574072f2",
+                            Id = "f5af63c5-78a8-4e45-b88b-2080fcff2f12",
+                            ConcurrencyStamp = "cb5a2360-93aa-4487-881b-c2d58850aeea",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "55825431-ecb1-4682-814d-e28a5726e6dd",
-                            ConcurrencyStamp = "5680930c-674e-42c9-828f-2608a5186246",
+                            Id = "f1618952-02ad-4837-96bb-14cdac3a4e41",
+                            ConcurrencyStamp = "7580361a-f5c2-4171-9bdc-1ae6ae8cb5df",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -351,9 +354,6 @@ namespace WebApiCrud.Migrations
                     b.Property<int?>("isdeleted")
                         .HasColumnType("int");
 
-                    b.Property<int?>("soldCount")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("categoryid");
@@ -427,8 +427,7 @@ namespace WebApiCrud.Migrations
                 {
                     b.HasOne("WebApiCrud.Models.Order", "Order")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OrderId");
 
                     b.Navigation("Order");
                 });

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiCrud.Entyites;
 
@@ -11,9 +12,11 @@ using WebApiCrud.Entyites;
 namespace WebApiCrud.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240602144704_soldCountForProduct")]
+    partial class soldCountForProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +54,15 @@ namespace WebApiCrud.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6e3db2c6-af2e-47f9-9929-af50d1e74e8c",
-                            ConcurrencyStamp = "594553c1-3ec1-4cc4-b101-9b55574072f2",
+                            Id = "4f99e235-1d0e-487d-a6d3-cfe2bbd667fc",
+                            ConcurrencyStamp = "21433449-bdb1-4a7c-a7f5-a23b0000d997",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "55825431-ecb1-4682-814d-e28a5726e6dd",
-                            ConcurrencyStamp = "5680930c-674e-42c9-828f-2608a5186246",
+                            Id = "62073d74-c1c7-41b4-966a-5e012dd273fc",
+                            ConcurrencyStamp = "13a664c3-6330-4f18-821a-9b0ac86ff3c3",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -427,8 +430,7 @@ namespace WebApiCrud.Migrations
                 {
                     b.HasOne("WebApiCrud.Models.Order", "Order")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OrderId");
 
                     b.Navigation("Order");
                 });

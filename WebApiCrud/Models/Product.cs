@@ -31,6 +31,14 @@ namespace WebApiCrud.Models
         [NotMapped]
         public IFormFile? imagefile { get; set; }
 
+        public int? ActualCount { get; set; }= 0;
+
+        //work as hidden the item from users even tha all count exists...
+        public int? isdeleted { get; set; } = 0;
+
+        public int? soldCount { get; set; } = 0;
+
+
 
     }
 }

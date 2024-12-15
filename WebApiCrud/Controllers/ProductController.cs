@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Core.Types;
+//using NuGet.Protocol.Core.Types;
 using System.IO;
 using System.Net.Http.Headers;
 using WebApiCrud.Entyites;
@@ -195,7 +195,7 @@ namespace WebApiCrud.Controllers
 
         //[AllowAnonymous]
         [HttpPost]
-        public ActionResult Post([FromForm] Product model)
+        public ActionResult Post([FromForm] DtoProduct model)
         {
             
             string? ImageName = null;
@@ -213,7 +213,7 @@ namespace WebApiCrud.Controllers
             //    //await model.ImageFile.CopyToAsync(stream);
             //    model.imagefile.CopyTo(stream);////////////
             //}
-
+            var newProduct=new Product();
             if (model.Id == 0 && ModelState.IsValid)
             {
                 
@@ -226,8 +226,15 @@ namespace WebApiCrud.Controllers
                     }
                     else
                     {
-                        model.imageName = ImageName;
-                        db.Add(model);
+                        //model.imageName = ImageName;
+                        newProduct.imageName = ImageName;
+                        newProduct.categoryid = model.categoryid;
+                        newProduct.ProductName = model.ProductName;
+                        newProduct.Price = model.Price;
+                        newProduct.Qty = model.Qty;
+                        newProduct.ActualCount = model.Qty;
+                        //db.Add(model);
+                        db.Add(newProduct);
                         db.SaveChanges();
                         //return Ok("Product is Created successfully ..");
                         //return Created("https://localhost:7269/api/Product/Details/" + model.Id, model);
@@ -367,6 +374,7 @@ namespace WebApiCrud.Controllers
                     product.Qty = model.Qty;
                     product.categoryid = model.categoryid;
                     product.imageName = ImageName;
+                    product.ActualCount = model.Qty;
                     //db.Attach(model); // Attach the entity to the context
                     //the neaxt comment code is true ...
                     //db.Entry(product).State = EntityState.Modified; // Mark the entity as modified
